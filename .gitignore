@@ -1,0 +1,11 @@
+.env
+.venv
+.vscode
+env/
+venv/
+ENV/
+
+
+__pycache__/
+
+pwd.txt
