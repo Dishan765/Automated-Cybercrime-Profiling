@@ -1,0 +1,8 @@
+0-7 radio plus (8)
+8-15 PREND COMPTE LEPEP (8)
+16-18 defimedia (3)
+19-21 lexpress (3)
+
+
+radio plus group, PREND COMPTE LEPEP, defimedia, lexpress
+[796, 607, 976, 321]
