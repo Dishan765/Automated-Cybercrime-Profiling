@@ -1,4 +1,3 @@
-from numpy.lib.utils import safe_eval
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium import webdriver
