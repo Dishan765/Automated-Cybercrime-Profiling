@@ -1,3 +1,6 @@
+# Scrape comment from specific Facebook Post
+# Used to generate dataset
+
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium import webdriver

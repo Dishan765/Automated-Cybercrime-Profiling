@@ -1,4 +1,4 @@
-# Create a list of Kreol words
+# Create a list of Kreol words from online dictionary found at:
 # https://www.lalitmauritius.org/en/dictionary.html?letter=a
 
 from bs4 import BeautifulSoup

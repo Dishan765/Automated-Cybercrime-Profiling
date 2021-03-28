@@ -68,11 +68,7 @@ class DataAnalysis():
 
 
 def main():
-    da = DataAnalysis("SmallDatasets/smallDataset.csv")
-    #da = DataAnalysis("SmallDatasets/processSmallDataset.csv")
-    # da.pie_chart()
-    da.label_barchart()
-
-
-if __name__ == "__main__":
-    main()
+    # da = DataAnalysis("SmallDatasets/smallDataset.csv")
+    # #da = DataAnalysis("SmallDatasets/processSmallDataset.csv")
+    # # da.pie_chart()
+    # da.label_barchart()

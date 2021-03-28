@@ -1,0 +1,16 @@
+1616756198294	geckodriver	INFO	Listening on 127.0.0.1:38227
+1616756199303	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileh8u3HN"
+1616756208726	geckodriver	INFO	Listening on 127.0.0.1:33027
+1616756208731	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilez6tzkn"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1616756226421	Marionette	INFO	Listening on port 43283
+1616756226721	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://www.lalitmauritius.org/display/js/jquery-1.10.2.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://www.lalitmauritius.org/display/js/jquery.cycle2.min.js, line 17: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://www.lalitmauritius.org/display/js/jquery-1.10.2.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://www.lalitmauritius.org/display/js/jquery.cycle2.min.js, line 17: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://www.lalitmauritius.org/display/js/jquery-1.10.2.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://www.lalitmauritius.org/display/js/jquery.cycle2.min.js, line 17: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://www.lalitmauritius.org/display/js/jquery-1.10.2.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://www.lalitmauritius.org/display/js/jquery.cycle2.min.js, line 17: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1616756581789	Marionette	INFO	Stopped listening on port 43283
