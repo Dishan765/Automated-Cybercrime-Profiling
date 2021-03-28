@@ -13,7 +13,7 @@ class spell_checker():
                           'premier ministre': ['pm'], 'to': ['t'], 'avek': ['avec'], 'mem': ['meme'], 'ar': ['r', 'are'], 'moris': ['maurice'], 'alle': [], 'gran': ['grand'],
                           'pri': ['prix', 'pris'], 'chatwa': [], 'mor': ['mort'], 'pays': [], 'kuma': ['couma'], 'pren': ['pren'], 'legime': ['legume'],
                           'kaka': ['kk', 'kkliki', 'kakaliki', 'kl'], 'liki': ['l', 'lkm', 'likitorma', 'boussou', 'busu', 'bousou'], 'gogot': ['ggt', 'g'], 'pilon': ['pln', 'peelon'],
-                          'fesse': ['fes', 'f', 'fess', 'fss'], 'bour': ['boure', 'pez', 'viol'], 'falour': ['flm', 'falourmama', 'falomama'], 'graine': ['grain'],'bouss':['bouse','bousse']}
+                          'fesse': ['fes', 'f', 'fess', 'fss'], 'bour': ['boure', 'pez', 'viol'], 'falour': ['flm', 'falourmama', 'falomama'], 'graine': ['grain'],'bouss':['bouse','bousse','bous']}
 
     # Read dictionary file
     # Return: array of words

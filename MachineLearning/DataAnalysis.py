@@ -13,12 +13,13 @@ import tkinter
 
 class DataAnalysis():
 
-    def __init__(self, data_file_name):
+    def __init__(self, data_file_name,feature_col_name):
         self.df = pd.read_csv(data_file_name)
+        self.feature_col_name = feature_col_name
 
     # Pie chart of % of comments from each source
     def pie_chart(self):
-        total_comments = self.df['Comments'].count()
+        total_comments = self.df[self.feature_col_name].count()
         print(f"Total No of Comments: {total_comments}")
 
         # Group data by source
@@ -72,3 +73,4 @@ def main():
     # #da = DataAnalysis("SmallDatasets/processSmallDataset.csv")
     # # da.pie_chart()
     # da.label_barchart()
+    pass

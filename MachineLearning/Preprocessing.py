@@ -10,9 +10,9 @@ import re
 class Preprocess:
     # dataset_name -> raw dataset location
     # new_dataset_name -> processed dataset location
-    def __init__(self, dataset_name, new_dataset_name):
+    def __init__(self, dataset_name, process_dataset_name):
         self.df = pd.read_csv(dataset_name)
-        self.new_ds_name = new_dataset_name
+        self.process_dataset_name = process_dataset_name
 
     # Cleaning - Lowercase all characters
     def lower_case(self):
@@ -96,14 +96,14 @@ class Preprocess:
         self.remove_null()
 
         # Write the preprocess dataset to a new file
-        self.df.to_csv(self.new_ds_name, index=False, header=True)
+        self.df.to_csv(self.process_dataset_name, index=False, header=True)
 
         # Returned the processed comments along with its labels as a dataframe
         return self.df
 
 
 def main():
-    pr = Preprocess("SmallDatasets/smallDataset.csv","SmallDatasets/processSmallDataset.csv")
+    pr = Preprocess("GenerateDataset/SmallDatasets/smallDataset.csv","GenerateDataset/SmallDatasets/processSmallDataset.csv")
     # pr = Preprocess("Datasets/Dataset.csv","Datasets/processDataset.csv")
     print(type(pr.preprocess()))
     
