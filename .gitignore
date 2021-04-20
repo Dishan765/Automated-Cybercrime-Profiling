@@ -9,3 +9,5 @@ ENV/
 __pycache__/
 
 pwd.txt
+*.pyc
+__pycache__

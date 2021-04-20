@@ -48,7 +48,6 @@ class spell_checker():
 
     # Return the correct spelling of words in a sentnece
     def correct_sent(self, sent):
-        replace_mappings = {}  # dictionary to store correct_word: wrong_word
         correct_sent = ""
         for word in sent.split():
             # print(word)
