@@ -76,6 +76,18 @@ class Preprocess:
     def remove_null(self):
         self.df = self.df.drop(self.df[self.df["processed_comments"] == ''].index)
         self.df.dropna()
+
+    # Remove special characters such @, $
+    def remove_special_characters(self):
+        no_special_char = []
+        # define the pattern to keep
+        pat = r'[^a-zA-z.,!?/:;\"\'\s]' 
+        for comment in self.df["processed_comments"]:
+            no_special_char.append(re.sub(pat, '', comment))
+        
+        print(no_special_char[0])
+        self.df["processed_comments"] = no_special_char
+
         
     # Remove unique words such as names
     def remove_rareWords():
@@ -93,6 +105,7 @@ class Preprocess:
         self.combine_whitespace()
         self.correct_spelling()
         self.removeStopwordSave()
+        self.remove_special_characters()
         self.remove_null()
 
         # Write the preprocess dataset to a new file
@@ -103,9 +116,10 @@ class Preprocess:
 
 
 def main():
-    pr = Preprocess("GenerateDataset/SmallDatasets/smallDataset.csv","GenerateDataset/SmallDatasets/processSmallDataset.csv")
+    pr = Preprocess("GenerateDataset/SmallDatasets/smallDataset.csv","GenerateDataset/SmallDatasets/processSmallDataset2.csv")
+    #pr.preprocess();
     # pr = Preprocess("Datasets/Dataset.csv","Datasets/processDataset.csv")
-    print(type(pr.preprocess()))
+    #print(type(pr.preprocess()))
     
 
 if __name__ == "__main__":

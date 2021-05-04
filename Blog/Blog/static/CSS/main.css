@@ -1,0 +1,33 @@
+img.size{
+  height:auto;
+  width:80px;
+}
+
+.content-section {
+  background: aliceblue;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+
+a.article-title:hover {
+  color: blue;
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+
+.article-metadata {
+  padding-bottom: 4px;
+  border-bottom: 1px solid black;
+}
+
+.article-metadata a:hover {
+  color: blue;
+  text-decoration: none;
+}

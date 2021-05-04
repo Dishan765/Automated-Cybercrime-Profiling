@@ -1,21 +1,38 @@
 # Check spelling of a word
-
+import csv
 
 class spell_checker():
+
     # Dictionary file
     def __init__(self, file_name):
         self.writer = open(file_name)
-        # correct_word: variations
-        self.word_dict = {'la': [], 'le': [], 'mo': [], 'pa': ['pas'], 'so': [], 'ti': ['chi'], 'de': ['2', 'd'], 'fer': ['faire', 'fr'], 'si': [], 'ou': [], 'pe': ['p'],
-                          'ek': ['et', 'e'], 'enn': ['ene', '1', 'en', 'n', 'un'], 'sa': [], 'zot': ['zotte'], 'dan': ['dans'], 'pou': ['pour'], 'a': [], 'b': ['be'], 'li': [],
-                          'dimoune': [], 'tou': ['tout'], 'c': [], 'twa': ['toi'], 'finn': ['in', 'fine'], 'byin': ['bien'], 'ki': ['qui'], 'mai': ['mais'], 'nou': ['nu'],
-                          'gagne': ['ggne'], 'nous': ['nou'], 'vasin': ['vaccin'], 'mwa': ['moi'], 'vinn': ['vine'], 'bann': ['banne', 'ban'], 'covid-19': ['covid', 'corona'],
-                          'premier ministre': ['pm'], 'to': ['t'], 'avek': ['avec'], 'mem': ['meme'], 'ar': ['r', 'are'], 'moris': ['maurice'], 'alle': [], 'gran': ['grand'],
-                          'pri': ['prix', 'pris'], 'chatwa': [], 'mor': ['mort'], 'pays': [], 'kuma': ['couma'], 'pren': ['pren'], 'legime': ['legume'],
-                          'kaka': ['kk', 'kkliki', 'kakaliki', 'kl'], 'liki': ['l', 'lkm', 'likitorma', 'boussou', 'busu', 'bousou'], 'gogot': ['ggt', 'g'], 'pilon': ['pln', 'peelon'],
-                          'fesse': ['fes', 'f', 'fess', 'fss'], 'bour': ['boure', 'pez', 'viol'], 'falour': ['flm', 'falourmama', 'falomama'], 'graine': ['grain'],'bouss':['bouse','bousse','bous']}
+        #File with correct_word: variations
+        self.variation_file_name = "SpellChecker/variationsWords.csv"
+        #Convert words in variationWords.csv to a dictionary
+        self.word_dict = self.variation_file_to_dic(self.variation_file_name)
 
-    # Read dictionary file
+        # correct_word: variations
+        # self.word_dict = {'la': [], 'le': [], 'mo': [], 'pa': ['pas'], 'so': [], 'ti': ['chi'], 'de': ['2', 'd'], 'fer': ['faire', 'fr'], 'si': [], 'ou': [], 'pe': ['p'],
+        #                   'ek': ['et', 'e'], 'enn': ['ene', '1', 'en', 'n', 'un'], 'sa': [], 'zot': ['zotte'], 'dan': ['dans'], 'pou': ['pour'], 'a': [], 'b': ['be'], 'li': [],
+        #                   'dimoune': [], 'tou': ['tout'], 'c': [], 'twa': ['toi'], 'finn': ['in', 'fine'], 'byin': ['bien'], 'ki': ['qui'], 'mai': ['mais'], 'nou': ['nu'],
+        #                   'gagne': ['ggne'], 'nous': ['nou'], 'vasin': ['vaccin'], 'mwa': ['moi'], 'vinn': ['vine'], 'bann': ['banne', 'ban'], 'covid-19': ['covid', 'corona'],
+        #                   'premier ministre': ['pm'], 'to': ['t'], 'avek': ['avec'], 'mem': ['meme'], 'ar': ['r', 'are'], 'moris': ['maurice'], 'alle': [], 'gran': ['grand'],
+        #                   'pri': ['prix', 'pris'], 'chatwa': [], 'mor': ['mort'], 'pays': [], 'kuma': ['couma'], 'pren': ['pren'], 'legime': ['legume'],
+        #                   'kaka': ['kk', 'kkliki', 'kakaliki', 'kl'], 'liki': ['l', 'lkm', 'likitorma', 'boussou', 'busu', 'bousou'], 'gogot': ['ggt', 'g'], 'pilon': ['pln', 'peelon'],
+        #                   'fesse': ['fes', 'f', 'fess', 'fss'], 'bour': ['boure', 'pez', 'viol'], 'falour': ['flm', 'falourmama', 'falomama'], 'graine': ['grain'],'bouss':['bouse','bousse','bous']}
+
+    def variation_file_to_dic(self,filename):
+        with open(filename, 'r') as csv_file:
+            reader = csv.reader(csv_file);
+            #print(csv_file.readlines())
+            temp_dict = dict(reader);
+        mydict={k:v.split(',') for k,v in temp_dict.items()}        
+        #print(mydict)
+        return mydict
+
+
+
+    # Read dictionary file ("KreolDictionary.txt")
     # Return: array of words
     def read_dic(self):
         kreol_words = self.writer.readlines()

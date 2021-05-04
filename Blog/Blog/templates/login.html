@@ -1,0 +1,56 @@
+{% extends 'header.html' %}
+
+{% block content %}
+<form method="POST" action="">
+  {{ form.hidden_tag() }}
+  <fieldset>
+    <legend><b>Login</b></legend>
+    <div class="form-group">
+      {{ form.email.label() }}
+
+      {% if form.email.errors %}
+      {{ form.email(class = "form-control is-invalid") }}
+      <div class="invalid-feedback">
+        {% for error in form.email.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+      </div>
+      {% else %}
+      {{ form.email(class = "form-control") }}
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      {{ form.password.label() }}
+
+      {% if form.password.errors %}
+      {{ form.password(class = "form-control is-invalid") }}
+      <div class="invalid-feedback">
+        {% for error in form.password.errors %}
+        <span>{{ error }}</span>
+        {% endfor %}
+      </div>
+      {% else %}
+      {{ form.password(class = "form-control") }}
+      {% endif %}
+    </div>
+    <div class="form-check">
+      {{ form.remember(class = "form-check-input") }}
+      {{ form.remember.label( class = "form-check-label") }}
+    </div>
+    <br/>
+    {{ form.submit(class = "btn btn-primary") }}
+
+  </fieldset>
+</form>
+
+<div>
+  <small class="text-muted">
+    Forget Password? <a href="{{ url_for('users.register') }}">Reset password</a>
+  </small>
+  <br />
+  <small class="text-muted">
+    Create an account. <a href="{{ url_for('users.register') }}">Register</a>
+  </small>
+</div>
+{% endblock content %}
