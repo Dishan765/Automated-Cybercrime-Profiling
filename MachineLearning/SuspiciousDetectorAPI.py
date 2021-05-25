@@ -88,6 +88,6 @@ def predict():
 
 
 if __name__ == '__main__':
-    print(preprocess("DATA      😉 😌 😍 🥰 😘 data www.google.com :) .@ 12 3333 .  🙃 😗  to ek kk pln flm   twa toi kaka kkliki mo pa so "))
+    #print(preprocess("DATA      😉 😌 😍 🥰 😘 data www.google.com :) .@ 12 3333 .  🙃 😗  to ek kk pln flm   twa toi kaka kkliki mo pa so "))
     # from werkzeug.serving import run_simple
     #app.run(port=9000, debug=True)

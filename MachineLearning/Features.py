@@ -1,6 +1,7 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
 
+# OBSOLETE since using pipeline
 class FeatureExtraction():
     
     def __init__(self,feature_list):

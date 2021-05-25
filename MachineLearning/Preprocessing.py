@@ -116,7 +116,8 @@ class Preprocess:
 
 
 def main():
-    pr = Preprocess("GenerateDataset/SmallDatasets/smallDataset.csv","GenerateDataset/SmallDatasets/processSmallDataset2.csv")
+    pass
+    #pr = Preprocess("GenerateDataset/SmallDatasets/smallDataset.csv","GenerateDataset/SmallDatasets/processSmallDataset2.csv")
     #pr.preprocess();
     # pr = Preprocess("Datasets/Dataset.csv","Datasets/processDataset.csv")
     #print(type(pr.preprocess()))

@@ -6,6 +6,9 @@ from sklearn.metrics import classification_report, confusion_matrix, accuracy_sc
 import pickle
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
+from imblearn.over_sampling import RandomOverSampler
+#from imblearn.pipeline import Pipeline
+from collections import Counter
 
 
 class TrainTest():
@@ -17,12 +20,30 @@ class TrainTest():
     # Split data into training and testing
     def TrainTestSplit(self):
         X_train, X_test, y_train, y_test = train_test_split(self.features_list, self.labels, test_size=0.2, random_state=0)
-        return X_train, X_test, y_train, y_test
+        # Make dataset balanced by oversampling
+        X_sm_train, y_sm_train = self.overSampling(X_train,y_train)
+        print('Original dataset shape {}'.format(Counter(y_train)))
+        print('Resampled dataset shape {}'.format(Counter(y_sm_train)))
+        
+        X_sm_train = X_sm_train.ravel()
+
+
+        #print(X_sm_train)
+        print(type(X_train))
+        return X_sm_train, X_test, y_sm_train, y_test
+
+    def overSampling(self,X_train,y_train):
+        over =  RandomOverSampler()
+        X_train = X_train.reshape(-1,1)
+        return over.fit_resample(X_train,y_train)
 
     # Logistic Regression Model
-    def LogisticRegressionModel(self,X_train,y_train,X_test):
+    def LogisticRegressionModel(self,X_train,y_train):
         # define the stages of the pipeline
-        pipeline = Pipeline(steps= [('tfidf', TfidfVectorizer(use_idf=True, max_features=2500, min_df=7, max_df=0.8)), ('model', LogisticRegression())])
+        model = LogisticRegression()
+        tfidf = TfidfVectorizer(use_idf=True, max_features=2500, min_df=7, max_df=0.8)
+        #pipeline = Pipeline(steps= [('tfidf', TfidfVectorizer(use_idf=True, max_features=2500, min_df=7, max_df=0.8)), ('model', LogisticRegression())])
+        pipeline = Pipeline(steps= [('tfidf', tfidf), ('model', model)])
         # fit the pipeline model with the training data                            
         LR = pipeline.fit(X_train,y_train)
 
@@ -33,9 +54,13 @@ class TrainTest():
         return LR
 
     # SVM Model
-    def svmModel(self,X_train,y_train,X_test):
+    def svmModel(self,X_train,y_train):
         # define the stages of the pipeline
-        pipeline = Pipeline(steps= [('tfidf', TfidfVectorizer(use_idf=True, max_features=2500, min_df=7, max_df=0.8)), ('model', svm.SVC())])
+        #pipeline = Pipeline(steps= [('tfidf', TfidfVectorizer(use_idf=True, max_features=2500, min_df=7, max_df=0.8)), ('model', svm.SVC())])
+        model = svm.SVC(class_weight={})
+        tfidf = TfidfVectorizer(use_idf=True, max_features=2500, min_df=7, max_df=0.8)
+        pipeline = Pipeline(steps= [('tfidf', tfidf), ('model', model)])
+
         # fit the pipeline model with the training data                            
         SVM = pipeline.fit(X_train,y_train)
 
@@ -46,9 +71,12 @@ class TrainTest():
         return SVM
 
     # Decision Tree Model
-    def dtModel(self,X_train,y_train,X_test):
+    def dtModel(self,X_train,y_train):
         # define the stages of the pipeline
-        pipeline = Pipeline(steps= [('tfidf', TfidfVectorizer(use_idf=True, max_features=2500, min_df=7, max_df=0.8)), ('model', tree.DecisionTreeClassifier())])
+        #pipeline = Pipeline(steps= [('tfidf', TfidfVectorizer(use_idf=True, max_features=2500, min_df=7, max_df=0.8)), ('model', tree.DecisionTreeClassifier())])
+        model = tree.DecisionTreeClassifier()
+        tfidf = TfidfVectorizer(use_idf=True, max_features=2500, min_df=7, max_df=0.8)
+        pipeline = Pipeline(steps= [('tfidf', tfidf), ('model', model)])
         # fit the pipeline model with the training data                            
         DT = pipeline.fit(X_train,y_train)
 
