@@ -87,6 +87,7 @@ class DataAnalysis():
         plt.ylabel("Frequency")
         plt.show()
 
+    
     # # For trained data set only
     # def barchart_labels_train(self,df_train):
     #     target_count = df_train.target.value_counts()
@@ -96,10 +97,19 @@ class DataAnalysis():
 
     #     target_count.plot(kind='bar', title='Count (target)');
 
+    # def scatter_plot(self):
+    #     zero = self.df[self.df['Labels']==0][0:50]
+    #     one = self.df[self.df['Labels']==1][0:50]
+    #     axes = zero.plot(kind='scatter',x='processed_comments',y='Labels',color='blue',label = 'zero')
+    #     one = zero.plot(kind='scatter',x='processed_comments',y='Labels',color='red',label = 'one',ax = axes)
+    #     plt.show()
+        
+
 if __name__ == '__main__':
-    processed_dataset = "GenerateDataset/Datasets/processedDataset.csv"
+    processed_dataset = "GenerateDataset/Datasets/processedDatasets.csv"
     analyse = DataAnalysis(processed_dataset, "processed_comments")
-    analyse.barchart_labels()
+    #analyse.barchart_labels()
+    analyse.scatter_plot()
 
 
     #analyse.generalInfo()

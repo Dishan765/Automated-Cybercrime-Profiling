@@ -67,7 +67,7 @@ def preprocess(data):
 
 # Path where model is located (LRclassifier.py)
 # os.chdir('MachineLearning/Models')
-file_name = 'Models/LRclassifier.pkl'
+file_name = 'Models/SVMclassifier.pkl'
 # Load Model
 with open(file_name, 'rb') as training_model:
     model = pickle.load(training_model)
@@ -78,6 +78,7 @@ app = Flask(__name__)
 def predict():
     data = request.get_json(force=True)
     data = preprocess(data['sentence'])
+    print(data)
     predict_request = [data]
     # request = np.array(predict_request)
     print(predict_request)
@@ -90,4 +91,4 @@ def predict():
 if __name__ == '__main__':
     #print(preprocess("DATA      😉 😌 😍 🥰 😘 data www.google.com :) .@ 12 3333 .  🙃 😗  to ek kk pln flm   twa toi kaka kkliki mo pa so "))
     # from werkzeug.serving import run_simple
-    #app.run(port=9000, debug=True)
+    app.run(port=9000, debug=True)
