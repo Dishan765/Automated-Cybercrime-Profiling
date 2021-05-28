@@ -11,7 +11,8 @@ def load_user(user_id):
 class Users(db.Model, UserMixin):
     __tablename__ = 'users'
     user_id = db.Column(db.Integer, primary_key=True,autoincrement=True)
-    name = db.Column(db.String(120), nullable=False)
+    first_name = db.Column(db.String(120), nullable=False)
+    last_name = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     image_file = db.Column(db.String(40), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
@@ -25,6 +26,9 @@ class Users(db.Model, UserMixin):
 
     # def __repr__(self):
     #     return f"User('{self.username}', '{self.email}', '{self.image_file}')"
+
+    def get_id(self):
+        return self.user_id
 
 
 #Table Posts
