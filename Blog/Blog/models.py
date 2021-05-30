@@ -14,7 +14,7 @@ class Users(db.Model, UserMixin):
     first_name = db.Column(db.String(120), nullable=False)
     last_name = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    image_file = db.Column(db.String(40), nullable=False, default='default.jpg')
+    image_file = db.Column(db.String(40), nullable=False, default='default.png')
     password = db.Column(db.String(60), nullable=False)
     education = db.Column(db.String(120), nullable=False)
     job = db.Column(db.String(120), nullable=False)
@@ -50,14 +50,17 @@ class Comments(db.Model):
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     content = db.Column(db.Text, nullable=False)
     author_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-
-class Posts_Comments(db.Model):
-    __tablename__ = 'posts_comments'
     post_id = db.Column(db.Integer)
-    comment_id = db.Column(db.Integer)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.post_id'), nullable=False)
-    comment_id = db.Column(db.Integer, db.ForeignKey('comments.comment_id'), nullable=False)
 
-    __table_args__ = (
-        db.PrimaryKeyConstraint('comment_id', 'post_id'),
-    )
+
+# class Posts_Comments(db.Model):
+#     __tablename__ = 'posts_comments'
+#     post_id = db.Column(db.Integer)
+#     comment_id = db.Column(db.Integer)
+#     post_id = db.Column(db.Integer, db.ForeignKey('posts.post_id'), nullable=False)
+#     comment_id = db.Column(db.Integer, db.ForeignKey('comments.comment_id'), nullable=False)
+
+#     __table_args__ = (
+#         db.PrimaryKeyConstraint('comment_id', 'post_id'),
+#     )

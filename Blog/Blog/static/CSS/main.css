@@ -1,33 +1,16 @@
-img.size{
-  height:auto;
-  width:80px;
+body{
+    background-color:gainsboro;
 }
 
-.content-section {
-  background: aliceblue;
-  padding: 10px 20px;
-  border: 1px solid #dddddd;
-  border-radius: 3px;
-  margin-bottom: 20px;
+.card{
+    background-color:aliceblue !important;
 }
 
-
-a.article-title:hover {
-  color: blue;
-  text-decoration: none;
+.thumbnail{
+    width:40px !important;
+    height:40px !important;
 }
 
-.article-content {
-  white-space: pre-line;
-}
-
-
-.article-metadata {
-  padding-bottom: 4px;
-  border-bottom: 1px solid black;
-}
-
-.article-metadata a:hover {
-  color: blue;
-  text-decoration: none;
+.comment-box{
+    margin:1%;
 }
