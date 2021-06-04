@@ -9,9 +9,7 @@
         <a class="mr-2" href="#">{{post.Users.first_name + " " +post.Users.last_name}}</a>
     </div>
     <div class="card-body">
-        <h3 class="card-title text-center"><a href="{{ url_for('posts.post', post_id=post.Posts.post_id) }}"
-                class="article-title">{{
-                post.Posts.title }}</a></h3>
+        <h3 class="card-title text-center">{{post.Posts.title }}</h3>
         <p class="article-content text-left">{{ post.Posts.content }}</p>
     </div>
     <div class="card-footer text-muted">

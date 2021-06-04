@@ -1,3 +1,4 @@
+from Blog.api.routes import new_comment, new_comment_hook,new_post_hook
 from flask import Blueprint
 from flask import (render_template, url_for, flash,
                    redirect, request, abort, Blueprint)
@@ -7,6 +8,7 @@ from Blog.models import Posts,Users,Comments
 from Blog.posts.forms import PostForm,commentForm
 from sqlalchemy import and_
 
+
 posts = Blueprint('posts', __name__)
 
 @posts.route("/post/new", methods = ['GET' , 'POST'])
@@ -14,9 +16,13 @@ posts = Blueprint('posts', __name__)
 def new_post():
   form = PostForm()
   if form.validate_on_submit():
-    post = Posts(title=form.title.data, content=form.content.data,author_id=current_user.get_id())
+    title = form.title.data
+    content = form.content.data
+    author_id=current_user.get_id()
+    post = Posts(title=title, content=form.content,author_id=author_id)
     db.session.add(post)
     db.session.commit()
+    new_post_hook(post.post_id,title,content,author_id,post.date_posted.strftime("%Y-%m-%d %H:%M:%S"))
     flash('Your post has been created', 'success')
     return redirect(url_for('main.home'))
   
@@ -42,9 +48,12 @@ def post(post_id):
     #Form to post comment
     form = commentForm()
     if(form.validate_on_submit()):#POST + FORM FIELDS VALIDATED
-        comment = Comments(content = form.content.data,author_id = current_user.get_id(),post_id=post_id)
+        content = form.content.data
+        author_id = current_user.get_id()
+        comment = Comments(content =content,author_id = author_id,post_id=post_id)
         db.session.add(comment)
         db.session.commit()
+        new_comment_hook(comment.comment_id,content,author_id,comment.date_posted.strftime("%Y-%m-%d %H:%M:%S"))
         flash("Your comment has been posted.")
         return redirect(url_for('posts.post', post_id=post_id))  
     else:

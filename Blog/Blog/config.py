@@ -10,4 +10,5 @@ class Config:
   #SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db' 
   SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{username}:{password}@{server}/{database}"
   SQLALCHEMY_TRACK_MODIFICATIONS = False
+  SQLALCHEMY_POOL_RECYCLE=90
 

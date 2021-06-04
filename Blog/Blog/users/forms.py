@@ -2,9 +2,14 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField,SelectField
 from wtforms.fields.core import RadioField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from wtforms.fields.html5 import DateField
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError,Required
+from wtforms_components import DateRange
 from flask_login import current_user
 from Blog.models import Users
+from datetime import date
+import datetime
+
 
 class RegistrationForm(FlaskForm):
   first_name = StringField('First Name', 
@@ -16,10 +21,10 @@ class RegistrationForm(FlaskForm):
 
   password = PasswordField('Password', validators=[DataRequired()])
   confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+  DOB = DateField('Date of Birth', validators=[Required()],format='%Y-%m-%d',)
   education = SelectField('Education', choices=['Primary','Secondary','Tertiary'])
-  job = StringField('Job Title',validators=[DataRequired()])
-  gender = RadioField('Gender', choices=['Male','Female','Others'])
-
+  job = SelectField('Job Status',choices=['Unemployed','Employed','Student'])
+  gender = RadioField('Gender', choices=['Male','Female','Others'],validators=[DataRequired(),])
 
   submit = SubmitField('Sign Up')
 
@@ -27,6 +32,17 @@ class RegistrationForm(FlaskForm):
     user = Users.query.filter_by(email=email.data).first()
     if user:
       raise ValidationError('This email is already taken.User another one.')
+
+  def validate_DOB(self, DOB):
+      todays_date = date.today()
+      if(DOB.data >todays_date):
+          raise ValidationError('Date of Birth cannnot be in the future')
+
+      time_diff = todays_date -  DOB.data
+      age = time_diff.days/365
+      if age < 16:
+          raise ValidationError('You should be above 16 years old to register.')
+
 
 class LoginForm(FlaskForm):
   email = StringField('Email', 

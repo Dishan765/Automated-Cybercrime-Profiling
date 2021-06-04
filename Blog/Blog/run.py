@@ -1,5 +1,5 @@
 from re import A
-from blog import create_app
+from Blog import create_app
 
 app = create_app()
 

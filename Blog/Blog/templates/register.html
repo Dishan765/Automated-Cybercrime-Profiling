@@ -2,6 +2,7 @@
 
 {% block content %}
 <form method="POST" action="">
+    
     {{ form.hidden_tag() }}
     <fieldset>
         <div class="row">
@@ -84,6 +85,20 @@
         </div>
 
         <div class="form-group">
+            {{ form.DOB.label() }}
+            {% if form.DOB.errors %}
+            {{ form.DOB(class = "form-control is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.DOB.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.DOB(class = "form-control") }}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
             {{ form.education.label() }}
             {% if form.education.errors %}
             {{ form.education(class = "form-control is-invalid") }}
@@ -99,9 +114,9 @@
 
         <div class="form-group">
             {{ form.job.label() }}
-            <small class="text-muted">
+            <!-- <small class="text-muted">
                 <p>(Student,Unemployed,or Job Title)</p>
-            </small>
+            </small> -->
             {% if form.job.errors %}
             {{ form.job(class = "form-control is-invalid") }}
             <div class="invalid-feedback">
@@ -116,23 +131,21 @@
 
         <div class="form-group">
             {{ form.gender.label() }}
-            {% if form.gender.errors %}
-            {{ form.gender(class = "form-control is-invalid") }}
-            <div class="invalid-feedback">
-                {% for error in form.gender.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-            </div>
-            {% else %}
-            <br />
+            {% for error in form.gender.errors %}
+                <span style = "color:orange"> *{{ error }}</span>
+            {% endfor %}
+            <br/>
             {% for subfield in form.gender %}
             <tr>
                 <td>{{ subfield }}</td>
                 <td>{{ subfield.label }}</td>
             </tr>
             {% endfor %}
-            {% endif %}
+            
+            
         </div>
+
+
         <div class="row">
             <div class="col-md-12 offset-md-6">
                 {{ form.submit(class = "btn btn-primary") }}
