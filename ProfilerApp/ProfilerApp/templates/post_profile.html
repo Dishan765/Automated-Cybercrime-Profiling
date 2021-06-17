@@ -1,0 +1,49 @@
+{% extends 'header.html' %}
+{% set active_page = 'post' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title text-center">{{post.title }}</h3>
+        <p class="article-content text-left">{{ post.content }}</p>
+    </div>
+    <div class="card-footer text-muted">
+        <div class="float-left">
+            <p class="text-left"><b>Date Posted:</b> {{ post.date_posted.strftime('%Y-%m-%d') }}</p>
+        </div>
+    </div>
+</div>
+
+<br />
+<div class = "col-md-12 offset-3">
+    <table class="table table-hover profile-table">
+        <thead>
+            <tr>
+                <td colspan=3 style="text-align:center;font-size:larger;">Profile Information</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-primary">
+                <th scope="row">Age</th>
+                <td>{{ profile.age }}</td>
+            </tr>
+
+            <tr class="table-primary">
+                <th scope="row">Education</th>
+                <td>{{ profile.education }}</td>
+            </tr>
+
+
+            <tr class="table-primary">
+                <th scope="row">Employment</th>
+                <td>{{ profile.job }}</td>
+            </tr>
+
+            <tr class="table-primary">
+                <th scope="row">Gender</th>
+                <td>{{ profile.gender }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

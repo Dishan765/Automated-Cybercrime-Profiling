@@ -1,44 +1,45 @@
 {% extends 'header.html' %}
+{% set active_page = "new_post" %}
+
 
 {% block content %}
-  <form method="POST" action="">
+
+<form method="POST" action="">
     {{ form.hidden_tag() }}
     <fieldset>
-      <legend><b>Create a New Post</b></legend>
-      <div class="form-group">
-        {{ form.title.label() }}
-        {% if form.title.errors %}
-        {{ form.title(class = "form-control is-invalid") }}
-        <div class="invalid-feedback">
-          {% for error in form.title.errors %}
-          <span>{{ error }}</span>
-          {% endfor %}
+        <legend><b>Create a New Post</b></legend>
+        <div class="form-group">
+            {{ form.title.label() }}
+            {% if form.title.errors %}
+            {{ form.title(class = "form-control is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.title.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.title(class = "form-control") }}
+            {% endif %}
         </div>
-        {% else %}
-        {{ form.title(class = "form-control") }}
-        {% endif %}
-      </div>
 
-      <div class="form-group">
-        {{ form.content.label() }}
+        <div class="form-group">
+            {{ form.content.label() }}
 
-        {% if form.content.errors %}
-        {{ form.content(class = "form-control is-invalid") }}
-        <div class="invalid-feedback">
-          {% for error in form.content.errors %}
-          <span>{{ error }}</span>
-          {% endfor %}
+            {% if form.content.errors %}
+            {{ form.content(class = "form-control is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.content.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.content(class = "form-control",rows='10',cols='100') }}
+            {% endif %}
         </div>
-        {% else %}
-        {{ form.content(class = "form-control") }}
-        {% endif %}
-      </div>
 
-      {{ form.submit(class = "btn btn-primary") }}
+        {{ form.submit(class = "btn btn-primary") }}
     </fieldset>
-  </form>
-</div>
-
+</form>
 
 
 {% endblock content %}

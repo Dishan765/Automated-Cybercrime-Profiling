@@ -22,7 +22,7 @@ class Users(db.Model, UserMixin):
     job = db.Column(db.String(120), nullable=False)
     gender = db.Column(db.String(120), nullable=False)
     checked = db.Column(db.Boolean, nullable=False, default = False)
-    date_created = db.Column(db.DateTime, unique=True, nullable=False,default= datetime.utcnow)
+    date_created = db.Column(db.DateTime, nullable=False,default= datetime.utcnow)
     role = db.Column(db.String(120), nullable=False,default="normal")
     #posts = db.relationship('Post', backref='author', lazy=True) #NOT A COLUMN
 

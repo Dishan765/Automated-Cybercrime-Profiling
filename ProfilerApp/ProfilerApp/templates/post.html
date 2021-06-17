@@ -1,0 +1,58 @@
+{% extends 'header.html' %}
+{% set active_page = 'post' %}
+{% block content %}
+
+<h3>Suspicious Posts</h3>
+{% for post in posts.items %}
+<div class="card text-white bg-info">
+    <div class="card-body">
+        <h4 class="card-title"><a href="{{ url_for('profile.post_profile', post_id=post.post_id) }}">{{post.title}}</a>
+        </h4>
+    </div>
+</div>
+<br />
+{% else %}
+<h4>No Suspicious Posts</h4>
+
+{% endfor %}
+
+
+
+
+{% if posts is defined and posts.items|length >1 %}
+
+<!-- Pagination Links-->
+<div class="text-center">
+    <a href="{{ url_for('posts.suspiciousPosts', page=posts.prev_num) }}"
+       class="btn btn-outline-info
+       {% if posts.page == 1 %}disabled{% endif %}">
+        &laquo;
+    </a>
+    <!-- Loop through the number of pages to display a link for each-->
+    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+        <!-- Check for the active page and set the link to "Active"-->
+            {% if posts.page == page_num %}
+            <a href="{{ url_for('posts.suspiciousPosts', page=page_num) }}"
+               class="btn btn-info">
+                {{ page_num }}
+            </a>
+            {% else %}
+            <a href="{{ url_for('posts.suspiciousPosts', page=page_num) }}"
+               class="btn btn-outline-info">
+                {{ page_num }}
+            </a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}    
+    <a href="{{ url_for('posts.suspiciousPosts', page=posts.next_num) }}"
+       class="btn btn-outline-info 
+       {% if posts.page == posts.pages %}disabled{% endif %}">
+        &raquo;
+    </a>
+</div>
+{% endif %}
+
+{% endblock %}

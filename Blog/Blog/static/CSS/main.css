@@ -14,3 +14,11 @@ body{
 .comment-box{
     margin:1%;
 }
+
+.edit-comment-btn,.delete-comment-btn,.edit-post-button,.edit-comment-btn{
+    font-size: 1em;
+}
+
+.buttonLink{
+    color:white;
+}

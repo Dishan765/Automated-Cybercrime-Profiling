@@ -1,0 +1,88 @@
+{% extends 'header.html' %}
+{% set active_page = "your_comments" %}
+
+{% block content %}
+
+<div class="col-md-12 offset-md-4">
+	<legend><b>Your Comments</b></legend>
+</div>
+
+<!-- All Comments -->
+{% for comment in comments.items %}
+
+<div class="card comment-box">
+    <div class="card-body">
+        <div>
+            <p class="card-text"><a href = "{{ url_for('posts.post',post_id=comment.post_id) }}">{{ comment.content }}</a></p>
+        </div>
+        <br/>
+        <div >
+            <button class="btn btn-primary edit-comment-btn"><a class="buttonLink"
+                    href="{{ url_for('posts.update_comment',post_id=comment.post_id,comment_id=comment.comment_id) }}">Edit</a></button>
+            <button type="button" class="btn btn-danger btn-sm m-1 delete-comment-btn" data-toggle="modal"
+                data-target="#deleteCommentModal">Delete</button>
+        </div>
+    </div>
+</div>
+
+<!--    DELETE Modal for comment -->
+<div class="modal fade" id="deleteCommentModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Comment?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form action="{{ url_for('posts.delete_comment', comment_id=comment.comment_id) }}" method="POST">
+                    <input class="btn btn-danger" type="submit" value="Delete">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<h4 class = "alert alert-info">You have written 0 comment.</h4>
+{% endfor %}
+
+{% if comments is defined and comments.items|length > 1 %}
+<!-- Pagination Links-->
+<div class="text-center">
+    <a href="{{ url_for('posts.your_comments', page=comments.prev_num) }}"
+       class="btn btn-outline-info 
+       {% if comments.page == 1 %}disabled{% endif %}">
+        &laquo;
+    </a>
+    <!-- Loop through the number of pages to display a link for each-->
+    {% for page_num in comments.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+        <!-- Check for the active page and set the link to "Active"-->
+            {% if comments.page == page_num %}
+            <a href="{{ url_for('posts.your_comments', page=page_num) }}"
+               class="btn btn-info">
+                {{ page_num }}
+            </a>
+            {% else %}
+            <a href="{{ url_for('posts.your_comments', page=page_num) }}"
+               class="btn btn-outline-info">
+                {{ page_num }}
+            </a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}    
+    <a href="{{ url_for('posts.your_comments', page=comments.next_num) }}"
+       class="btn btn-outline-info 
+       {% if comments.page == comments.pages %}disabled{% endif %}">
+        &raquo;
+    </a>
+</div>
+{% endif %}
+
+
+{% endblock content %}

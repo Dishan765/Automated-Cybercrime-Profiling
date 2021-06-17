@@ -1,0 +1,23 @@
+{% extends 'adminHeader.html' %}
+{% set active_page = 'listAccount' %}
+{% block content %}
+
+<div class="col-md-12">
+    <table class="table table-hover acc-table">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">Email</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr class="table-secondary">
+                <td>{{ user.email }}</td>
+                <td><button class = "btn btn-primary"><a class = "button-link" href = "{{ url_for('admin.deleteAccount',user_id= user.user_id) }}">Delete</a></button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

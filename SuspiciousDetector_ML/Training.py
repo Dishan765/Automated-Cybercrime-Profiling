@@ -23,7 +23,7 @@ class TrainTest():
     # Split data into training and testing
     def TrainTestSplit(self):
         X_train, X_test, y_train, y_test = train_test_split(self.features_list, self.labels, test_size=0.3, random_state=42)
-        # Make dataset balanced by oversampling
+        #Make dataset balanced by oversampling
         X_sm_train, y_sm_train = self.overSampling(X_train,y_train)
         print('Original dataset shape {}'.format(Counter(y_train)))
         print('Resampled dataset shape {}'.format(Counter(y_sm_train)))
@@ -57,10 +57,10 @@ class TrainTest():
 
     # SVM Model
     def svmModel(self,X_train,y_train):
-        np.random.seed(0)
+        #np.random.seed(0)
         # define the stages of the pipeline
         #pipeline = Pipeline(steps= [('tfidf', TfidfVectorizer(use_idf=True, max_features=2500, min_df=7, max_df=0.8)), ('model', svm.SVC())])
-        model = SVC(kernel='linear',gamma='scale',C=1)
+        model = SVC(kernel='linear',gamma='scale',C=10)
         #kernel='linear',gamma='scale',C=1,class_weight={0:1}
         tfidf = TfidfVectorizer(use_idf=True, max_features=2500, min_df=7, max_df=0.8)
         pipeline = Pipeline(steps= [('tfidf', tfidf), ('model', model)])

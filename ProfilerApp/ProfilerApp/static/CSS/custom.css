@@ -1,0 +1,44 @@
+.profile-table,.profile-table.th,.profile-table.td{
+    width: 50%;
+    border: 1px solid paleturquoise;
+    border-collapse: collapse;
+}
+
+.profile-table.tr{
+    width:10px;
+}
+
+
+
+.profile-table.thead{
+    background-color: rgb(109, 194, 227) !important;
+    font-weight: bold;
+}
+
+.profile-button{
+    margin:1%;
+}
+
+.profile-button-active{
+    background-color:aqua;
+}
+
+.button-link{
+    color:white;
+}
+
+.button-link:hover{
+    color:white;
+}
+
+a{
+    /*Remove underline from links*/
+}
+
+.acc-table,th,td{
+    width:50%;
+    margin-left: 21%;
+    border: 1px solid paleturquoise;
+    border-collapse: collapse;
+
+}

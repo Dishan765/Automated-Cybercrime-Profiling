@@ -10,3 +10,13 @@ class PostForm(FlaskForm):
 class commentForm(FlaskForm):
     content = TextAreaField('Content', validators=[DataRequired()])
     submit = SubmitField('Comment')
+
+class editCommentForm(FlaskForm):
+    content = TextAreaField('Content', validators=[DataRequired()])
+    submit = SubmitField('Save Edit')
+
+
+class editPostForm(FlaskForm):
+  title = StringField('Title', validators=[DataRequired()])
+  content = TextAreaField('Content', validators=[DataRequired()])
+  submit = SubmitField('Edit')

@@ -1,7 +1,6 @@
 from pandas.io.parsers import read_csv
 from Preprocessing import Preprocess
 from DataAnalysis import DataAnalysis
-from Features import FeatureExtraction
 from Training import TrainTest
 import pickle
 import pandas as pd
@@ -146,11 +145,11 @@ def main():
 
     # Loading model to compare the results
     LR = train.loadModel("./Models/LRclassifier.pkl")
-    print(LR.predict(["Ale mor"]))
+    print(LR.predict(["BLD"]))
     svm = train.loadModel("./Models/SVMclassifier.pkl")
-    print(svm.predict(["Ale mor"]))
+    print(svm.predict(["BLD"]))
     dt = train.loadModel("./Models/SVMclassifier.pkl")
-    print(dt.predict(["Ale mor"]))
+    print(dt.predict(["Ale mort"]))
     # rf = train.loadModel("./Models/RFclassifier.pkl")
     # print(rf.predict(["Ale suicider"]))
 

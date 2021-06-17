@@ -1,7 +1,14 @@
 {% extends 'header.html' %}
+{% set active_page = "home" %}
 
 {% block content %}
-{% for result in posts %}
+
+
+
+
+
+
+{% for result in posts.items %}
 
 <div class="card">
     <div class="card-header">
@@ -27,19 +34,46 @@
     </div>
 </div>
 <br />
-<!-- <article class="media content-section">
-    <div class="media-body">
-        <div class="article-metadata">
-            <img class="mr-3 rounded-circle img-thumnail align-self-start size"
-                src="{{ url_for('static', filename='Images/' + result.Users.image_file) }}" alt="Author's Image">
-            <a class="mr-2" href="#">{{result.Users.first_name + " " +result.Users.last_name}}</a>
-            <small class="text-muted">{{ result.Posts.date_posted.strftime('%Y-%m-%d') }}</small>
-        </div>
-        
-    </div>
-</article> -->
+{% else %}
+<h4 class = "alert alert-info">There are 0 posts.</h4>
 
 {% endfor %}
 
+{% if posts is defined and posts.items|length > 1 %}
+
+
+<!-- Pagination Links-->
+<div class="text-center">
+    <a href="{{ url_for('main.home', page=posts.prev_num) }}"
+       class="btn btn-outline-info 
+       {% if posts.page == 1 %}disabled{% endif %}">
+        &laquo;
+    </a>
+    <!-- Loop through the number of pages to display a link for each-->
+    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+        <!-- Check for the active page and set the link to "Active"-->
+            {% if posts.page == page_num %}
+            <a href="{{ url_for('main.home', page=page_num) }}"
+               class="btn btn-info">
+                {{ page_num }}
+            </a>
+            {% else %}
+            <a href="{{ url_for('main.home', page=page_num) }}"
+               class="btn btn-outline-info">
+                {{ page_num }}
+            </a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}    
+    <a href="{{ url_for('main.home', page=posts.next_num) }}"
+       class="btn btn-outline-info 
+       {% if posts.page == posts.pages %}disabled{% endif %}">
+        &raquo;
+    </a>
+</div>
+{% endif %}
 
 {% endblock content %}

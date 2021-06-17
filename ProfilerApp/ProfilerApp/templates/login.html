@@ -1,0 +1,61 @@
+{% extends 'header.html' %}
+{% set active_page = 'login' %}
+
+{% block content %}
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <fieldset>
+        <div class="row">
+            <div class="col-md-12 offset-md-6">
+                <legend><b>Login</b></legend>
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form.email.label() }}
+
+            {% if form.email.errors %}
+            {{ form.email(class = "form-control is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.email.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.email(class = "form-control") }}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.password.label() }}
+
+            {% if form.password.errors %}
+            {{ form.password(class = "form-control is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.password.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.password(class = "form-control") }}
+            {% endif %}
+        </div>
+        <div class="form-check">
+            {{ form.remember(class = "form-check-input") }}
+            {{ form.remember.label( class = "form-check-label") }}
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12 offset-md-6">
+                {{ form.submit(class = "btn btn-primary") }}
+            </div>
+        </div>
+        <div>
+            <small class="text-muted">
+                Forget Password? <a href="{{ url_for('users.reset_request') }}">Reset password</a>
+            </small>
+        </div>
+        
+    </fieldset>
+</form>
+{% endblock content %}

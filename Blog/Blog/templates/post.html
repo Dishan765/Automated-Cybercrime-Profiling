@@ -4,12 +4,27 @@
 <!-- Post -->
 <div class="card">
     <div class="card-header">
-        <img class=" mr-3 rounded-circle img-thumnail align-self-start"
-            src="{{ url_for('static', filename='Images/' + post.Users.image_file) }}" alt="Author's Image">
-        <a class="mr-2" href="#">{{post.Users.first_name + " " +post.Users.last_name}}</a>
+        <div class="float-left">
+            <img class="thumbnail mr-3 rounded-circle img-thumnail align-self-start"
+                src="{{ url_for('static', filename='Images/' + post.Users.image_file) }}" alt="Author's Image">
+            <a class="mr-2">{{post.Users.first_name + " " +post.Users.last_name}}</a>
+        </div>
+        {% if post.Posts.author_id == current_user.get_id()%}
+        <div class="float-right">
+            <small>
+                <button class="btn btn-danger edit-post-btn btn-sm m-1"><a class="buttonLink"
+                        href="{{ url_for('posts.update_post',post_id=post.Posts.post_id) }}">Edit</a></button>
+                <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal"
+                    data-target="#deletePostModal">
+                    Delete
+                </button>
+            </small>
+        </div>
+        {% endif %}
     </div>
     <div class="card-body">
         <h3 class="card-title text-center">{{post.Posts.title }}</h3>
+
         <p class="article-content text-left">{{ post.Posts.content }}</p>
     </div>
     <div class="card-footer text-muted">
@@ -22,13 +37,40 @@
     </div>
 </div>
 <br />
+
+<!--    DELETE Modal for post -->
+<div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form action="{{ url_for('posts.delete_post',post_id=post.Posts.post_id) }}" method="POST">
+                    <input class="btn btn-danger" type="submit" value="Delete">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% if current_user.is_authenticated and not checked%}
+<p class="alert alert-warning">Confirm your account to write a comment</p>
+{% elif current_user.is_authenticated and checked%}
 <!-- Comment Box -->
 <form method="POST" action="">
     {{ form.hidden_tag() }}
     <fieldset>
-    
+
         <div class="form-group">
-            <b>Comment as {{ logged_user.first_name }} </b>
+            <p><b>Comment as {{ logged_user.first_name + " " + logged_user.last_name }} </b></p>
 
             {% if form.content.errors %}
             {{ form.content(class = "form-control is-invalid") }}
@@ -49,7 +91,10 @@
         </div>
     </fieldset>
 </form>
-<br/>
+{% else %}
+<p class="alert alert-warning">Login to write a comment</p>
+{% endif %}
+<br />
 
 
 
@@ -57,15 +102,52 @@
 {% for comment in comments %}
 
 <div class="card comment-box">
+
     <div class="card-body">
-        <h5 class="card-title">{{ comment.Users.first_name + " . " }}<small>{{ comment.Comments.date_posted.strftime('%Y-%m-%d') }}</small></h5>
+        <div class="float-left">
+            <h5 class="card-title">{{ comment.Users.first_name + " . " }}<small>{{
+                    comment.Comments.date_posted.strftime('%Y-%m-%d') }}</small></h5>
+        </div>
+        {% if comment.Comments.author_id == current_user.get_id()%}
+        <div class="float-right">
+            <small>
+                <button class="btn btn-primary edit-comment-btn"><a class="buttonLink"
+                        href="{{ url_for('posts.update_comment',post_id=post.Posts.post_id,comment_id=comment.Comments.comment_id) }}">Edit</a></button>
+                <button type="button" class="btn btn-danger btn-sm m-1 delete-comment-btn" data-toggle="modal"
+                    data-target="#deleteCommentModal">Delete</button>
+            </small>
+        </div>
+        {% endif %}
+        <br />
+        <br />
+        <div class="float-none">
+            <p class="card-text">{{ comment.Comments.content }}</p>
+        </div>
+    </div>
+</div>
 
-        <p class="card-text">{{ comment.Comments.content }}</p>
 
+<!--    DELETE Modal for comment -->
+<div class="modal fade" id="deleteCommentModal" tabindex="-1" role="dialog" aria-labelledby="deleteCommentModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Comment?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form action="{{ url_for('posts.delete_comment', comment_id=comment.Comments.comment_id) }}"
+                    method="POST">
+                    <input class="btn btn-danger" type="submit" value="Delete">
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
 {% endfor %}
-
-
 {% endblock content %}

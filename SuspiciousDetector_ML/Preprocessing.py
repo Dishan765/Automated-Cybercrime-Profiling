@@ -97,15 +97,23 @@ class Preprocess:
         pass
 
     def preprocess(self):
-        # Call all the preprocessing functions
+        #Case Conversion
         self.lower_case()
+        #Cleaning
         self.remove_emogies()
+        #Cleaning
         self.remove_urls()
+        #Cleaning
         self.remove_punctuations()
+        #Cleaning
         self.combine_whitespace()
+        #Normalisation
         self.correct_spelling()
+        #Stop words removal
         self.removeStopwordSave()
+        #Cleaning
         self.remove_special_characters()
+        #Cleaning
         self.remove_null()
 
         # Write the preprocess dataset to a new file

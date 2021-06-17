@@ -106,12 +106,10 @@ class DataAnalysis():
         
 
 if __name__ == '__main__':
-    processed_dataset = "GenerateDataset/Datasets/processedDatasets.csv"
+    processed_dataset = "GenerateDataset/Datasets/processedDataset2.csv"
     analyse = DataAnalysis(processed_dataset, "processed_comments")
-    #analyse.barchart_labels()
-    analyse.scatter_plot()
 
-
-    #analyse.generalInfo()
-    #analyse.pie_chart()
-    #analyse.barchart_source()
+    analyse.generalInfo()
+    analyse.pie_chart()
+    analyse.barchart_labels()
+    analyse.barchart_labels_per_source()

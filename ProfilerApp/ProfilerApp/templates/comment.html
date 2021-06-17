@@ -1,0 +1,53 @@
+{% extends 'header.html' %}
+{% set active_page = 'comment' %}
+{% block content %}
+
+<h3>Suspicious comments</h3>
+{% for comment in comments.items %}
+<div class="card text-white bg-info">
+    <div class="card-body">
+        <h4 class="card-title"><a href="{{ url_for('profile.comment_profile', comment_id=comment.comment_id) }}">{{comment.content}}</a></h4>
+    </div>
+</div>
+<br />
+{% else %}
+<h4>No Suspicious Comments</h4>
+{% endfor %}
+
+
+{% if comments is defined and comments.items|length > 1 %}
+<!-- Pagination Links-->
+<div class="text-center">
+    <a href="{{ url_for('posts.suspiciousComments', page=comments.prev_num) }}"
+       class="btn btn-outline-info
+       {% if comments.page == 1 %}disabled{% endif %}">
+        &laquo;
+    </a>
+    <!-- Loop through the number of pages to display a link for each-->
+    {% for page_num in comments.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+        <!-- Check for the active page and set the link to "Active"-->
+            {% if comments.page == page_num %}
+            <a href="{{ url_for('posts.suspiciousComments', page=page_num) }}"
+               class="btn btn-info">
+                {{ page_num }}
+            </a>
+            {% else %}
+            <a href="{{ url_for('posts.suspiciousComments', page=page_num) }}"
+               class="btn btn-outline-info">
+                {{ page_num }}
+            </a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}    
+    <a href="{{ url_for('posts.suspiciousComments', page=comments.next_num) }}"
+       class="btn btn-outline-info 
+       {% if comments.page == comments.pages %}disabled{% endif %}">
+        &raquo;
+    </a>
+</div>
+{% endif %}
+
+{% endblock %}

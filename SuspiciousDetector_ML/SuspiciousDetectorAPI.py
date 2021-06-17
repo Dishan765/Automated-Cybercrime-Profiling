@@ -76,15 +76,15 @@ app = Flask(__name__)
 
 @app.route('/ml_api', methods=['POST'])
 def predict():
+    # POST request for sentence
     data = request.get_json(force=True)
+    #Pre-process the sentence
     data = preprocess(data['sentence'])
-    print(data)
+    #Classify the sentence as 0 or 1
     predict_request = [data]
-    # request = np.array(predict_request)
-    print(predict_request)
     prediction = model.predict(predict_request)
-    # pred = prediction[0]
-    print(prediction)
+    
+    # Return the predicion which is 0 or 1
     return jsonify(int(prediction))
 
 
