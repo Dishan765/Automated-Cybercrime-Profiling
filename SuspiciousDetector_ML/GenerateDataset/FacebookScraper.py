@@ -39,8 +39,7 @@ class Scraper:
         #print("Enter Login Details for Facebook")
         #email = input("Enter your email: ")
         #pwd = getpass.getpass(prompt="Enter your password: ")
-        email = "tom310359@gmail.com"
-        pwd = "12345qwerty!"
+        
 
         # target username and password
         username = WebDriverWait(self.driver, 10).until(
@@ -198,31 +197,31 @@ def main():
         print(f".................PROCESSING URL NO {index}.............")
         comments = scraper.scrap_comments(urls)# Scrap all comments in the current post
 
-        if index ==0:
-            for comment in comments:
-                source.append("PRENDCOMPTELEPEP")
-                links.append(urls)
-        elif index>0:
-            for comment in comments:
-                source.append("RadioPlusMauritiusIleMauriceFanGroupUnofficial")
-                links.append(urls)
-
-        # if index>=0 and index <=7 :#radio plus group
-        #     for comment in comments:
-        #         source.append("RadioPlusMauritiusIleMauriceFanGroupUnofficial")
-        #         links.append(urls)
-        # elif index>=8 and index <=15:#prend compte lepep
+        # if index ==0:
         #     for comment in comments:
         #         source.append("PRENDCOMPTELEPEP")
         #         links.append(urls)
-        # elif index>=16 and index <=18:#defimedia
+        # elif index>0:
         #     for comment in comments:
-        #         source.append("Defimedia")
+        #         source.append("RadioPlusMauritiusIleMauriceFanGroupUnofficial")
         #         links.append(urls)
-        # elif index>=19 and index <=21:#lexpress
-        #     for comment in comments:
-        #         source.append("Lexpress")
-        #         links.append(urls)
+
+        if index>=0 and index <=7 :#radio plus group
+            for comment in comments:
+                source.append("RadioPlusMauritiusIleMauriceFanGroupUnofficial")
+                links.append(urls)
+        elif index>=8 and index <=15:#prend compte lepep
+            for comment in comments:
+                source.append("PRENDCOMPTELEPEP")
+                links.append(urls)
+        elif index>=16 and index <=18:#defimedia
+            for comment in comments:
+                source.append("Defimedia")
+                links.append(urls)
+        elif index>=19 and index <=21:#lexpress
+            for comment in comments:
+                source.append("Lexpress")
+                links.append(urls)
 
         comment_list.extend(comments)
         print(len(comment_list))

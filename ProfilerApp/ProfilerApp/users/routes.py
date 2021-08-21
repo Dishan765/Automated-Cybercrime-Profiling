@@ -7,6 +7,8 @@ from ProfilerApp import db, bcrypt
 from flask_login import login_user, current_user,logout_user
 from ProfilerApp.admin.utils import send_email
 from ProfilerApp.users.token import confirm_token,generate_confirmation_token
+from datetime import timedelta
+from flask import current_app
 
 users = Blueprint("users", __name__)
 
@@ -22,6 +24,8 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, form.remember.data)
             flash(f"Login Successfully.", "success")
+            session.permanent = True
+            current_app.permanent_session_lifetime = timedelta(minutes=60)
             return redirect(url_for("profile.summaryProfile",profile_type='age'))
         else:
             flash(f"Wrong username or password.", "danger")

@@ -132,17 +132,6 @@ def main():
     # Save model
     train.saveModel(dt, "./Models/DTclassifier.pkl")
 
-    # # # TRAINING USING RANDOM FOREST
-    # print(
-    #     "***********************************************************************************************************"
-    # )
-    # print("\tRandom Forest:")
-    # rf = train.randomForestModel(X_train, y_train)
-    # # Evaluate trained model
-    # train.Eval(dt, X_test, y_test)
-    # # Save model
-    # train.saveModel(dt, "./Models/RFclassifier.pkl")
-
     # Loading model to compare the results
     LR = train.loadModel("./Models/LRclassifier.pkl")
     print(LR.predict(["BLD"]))

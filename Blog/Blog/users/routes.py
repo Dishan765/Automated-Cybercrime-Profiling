@@ -10,7 +10,8 @@ from Blog.users.token import confirm_token,generate_confirmation_token
 from Blog.users.email import send_email
 import datetime
 from Blog.api.routes import update_account_hook
-
+from datetime import timedelta
+from flask import current_app
 
 users = Blueprint("users", __name__)
 
@@ -63,6 +64,10 @@ def login():
         user = Users.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, form.remember.data)
+
+            session.permanent = True
+            current_app.permanent_session_lifetime = timedelta(minutes=60)
+
             flash(f"Login Successfully.", "success")
             return redirect(url_for("main.home"))
         else:
