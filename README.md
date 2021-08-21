@@ -28,6 +28,6 @@ db.create_all()
 - Run requirements.txt
 - ```sh python3 run.py ```
 
-##SuspiciousDetector_ML
+## SuspiciousDetector_ML
 - ```sh python3 Main.py ``` (optional only to retrain models)
 - ```sh python3 SuspiciousDetectorAPI.py ```
